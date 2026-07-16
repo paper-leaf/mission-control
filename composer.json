@@ -38,13 +38,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Paper Leaf\\MissionControl\\": "src/",
-            "Paper Leaf\\MissionControl\\Database\\Factories\\": "database/factories/"
+            "PaperLeaf\\MissionControl\\": "src/",
+            "PaperLeaf\\MissionControl\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Paper Leaf\\MissionControl\\Tests\\": "tests/"
+            "PaperLeaf\\MissionControl\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -56,10 +56,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Paper Leaf\\MissionControl\\MissionControlServiceProvider"
+                "PaperLeaf\\MissionControl\\MissionControlServiceProvider"
             ],
             "aliases": {
-                "MissionControl": "Paper Leaf\\MissionControl\\Facades\\MissionControl"
+                "MissionControl": "PaperLeaf\\MissionControl\\Facades\\MissionControl"
             }
         }
     },

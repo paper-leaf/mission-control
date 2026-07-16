@@ -1,6 +1,6 @@
 <?php
 
-namespace Paper Leaf\MissionControl;
+namespace PaperLeaf\MissionControl;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Paper Leaf\MissionControl\Commands;
+namespace PaperLeaf\MissionControl\Commands;
 
 use Illuminate\Console\Command;
 

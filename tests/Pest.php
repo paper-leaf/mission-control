@@ -1,5 +1,5 @@
 <?php
 
-use Paper Leaf\MissionControl\Tests\TestCase;
+use PaperLeaf\MissionControl\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

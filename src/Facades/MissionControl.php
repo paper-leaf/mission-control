@@ -1,16 +1,16 @@
 <?php
 
-namespace Paper Leaf\MissionControl\Facades;
+namespace PaperLeaf\MissionControl\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Paper Leaf\MissionControl\MissionControl
+ * @see \PaperLeaf\MissionControl\MissionControl
  */
 class MissionControl extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Paper Leaf\MissionControl\MissionControl::class;
+        return \PaperLeaf\MissionControl\MissionControl::class;
     }
 }

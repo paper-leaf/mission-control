@@ -1,6 +1,6 @@
 <?php
 
-namespace Paper Leaf\MissionControl;
+namespace PaperLeaf\MissionControl;
 
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
@@ -13,8 +13,8 @@ use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Paper Leaf\MissionControl\Commands\MissionControlCommand;
-use Paper Leaf\MissionControl\Testing\TestsMissionControl;
+use PaperLeaf\MissionControl\Commands\MissionControlCommand;
+use PaperLeaf\MissionControl\Testing\TestsMissionControl;
 
 class MissionControlServiceProvider extends PackageServiceProvider
 {

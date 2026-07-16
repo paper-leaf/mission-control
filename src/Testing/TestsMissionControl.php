@@ -1,6 +1,6 @@
 <?php
 
-namespace Paper Leaf\MissionControl\Testing;
+namespace PaperLeaf\MissionControl\Testing;
 
 use Livewire\Features\SupportTesting\Testable;
 

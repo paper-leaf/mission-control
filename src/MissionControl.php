@@ -1,5 +1,5 @@
 <?php
 
-namespace Paper Leaf\MissionControl;
+namespace PaperLeaf\MissionControl;
 
 class MissionControl {}

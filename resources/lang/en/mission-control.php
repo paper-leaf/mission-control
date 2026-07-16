@@ -1,6 +1,6 @@
 <?php
 
-// translations for Paper Leaf/MissionControl
+// translations for PaperLeaf/MissionControl
 return [
     //
 ];

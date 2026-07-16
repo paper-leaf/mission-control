@@ -1,6 +1,6 @@
 <?php
 
-// config for Paper Leaf/MissionControl
+// config for PaperLeaf/MissionControl
 return [
 
 ];

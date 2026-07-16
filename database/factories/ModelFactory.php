@@ -1,6 +1,6 @@
 <?php
 
-namespace Paper Leaf\MissionControl\Database\Factories;
+namespace PaperLeaf\MissionControl\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Paper Leaf\MissionControl\Tests;
+namespace PaperLeaf\MissionControl\Tests;
 
 use BladeUI\Heroicons\BladeHeroiconsServiceProvider;
 use BladeUI\Icons\BladeIconsServiceProvider;
@@ -19,7 +19,7 @@ use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\Concerns\WithWorkbench;
 use Orchestra\Testbench\TestCase as Orchestra;
 use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
-use Paper Leaf\MissionControl\MissionControlServiceProvider;
+use PaperLeaf\MissionControl\MissionControlServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -31,7 +31,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Paper Leaf\\MissionControl\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
+            fn (string $modelName) => 'PaperLeaf\\MissionControl\\Database\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 
