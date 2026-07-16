@@ -1,15 +1,15 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Paper Leaf\MissionControl;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class SkeletonPlugin implements Plugin
+class MissionControlPlugin implements Plugin
 {
     public function getId(): string
     {
-        return 'skeleton';
+        return 'mission-control';
     }
 
     public function register(Panel $panel): void

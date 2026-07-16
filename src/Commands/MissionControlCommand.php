@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Paper Leaf\MissionControl\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class MissionControlCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'mission-control';
 
     public $description = 'My command';
 
