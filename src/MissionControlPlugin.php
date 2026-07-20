@@ -5,6 +5,8 @@ namespace PaperLeaf\MissionControl;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
+use PaperLeaf\MissionControl\Pages\ControlDashboard;
+
 class MissionControlPlugin implements Plugin
 {
     public function getId(): string
@@ -14,7 +16,10 @@ class MissionControlPlugin implements Plugin
 
     public function register(Panel $panel): void
     {
-        //
+        $panel
+            ->pages([
+                ControlDashboard::class,
+            ]);
     }
 
     public function boot(Panel $panel): void

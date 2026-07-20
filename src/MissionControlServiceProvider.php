@@ -58,6 +58,12 @@ class MissionControlServiceProvider extends PackageServiceProvider
         }
     }
 
+    public function boot(): void
+    {
+        // Register the view location
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'mission-control');
+    }
+
     public function packageRegistered(): void {}
 
     public function packageBooted(): void
@@ -146,7 +152,7 @@ class MissionControlServiceProvider extends PackageServiceProvider
     protected function getMigrations(): array
     {
         return [
-            'create_mission-control_table',
+            // 'create_mission_control_table',
         ];
     }
 }
