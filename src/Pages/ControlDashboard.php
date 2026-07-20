@@ -10,17 +10,6 @@ use Filament\Schemas\Components\Livewire;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 
-// use Filament\Forms\Components\Livewire;
-// use Filament\Forms\Components\Tabs;
-// use Filament\Forms\Components\Schema;
-
-
-
-use Filament\Schemas\Concerns\InteractsWithSchemas;
-use Filament\Schemas\Concerns\RestrictsFileUploadsToSchemaComponents;
-use Filament\Schemas\Contracts\HasSchemas;
-
-
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;

@@ -5,18 +5,19 @@ namespace PaperLeaf\MissionControl\Widgets;
 use Filament\Widgets\Widget;
 use Livewire\Attributes\Computed;
 
+use PaperLeaf\MissionControl\Services\PackagesService;
+
 class EnvironmentWidget extends Widget
 {
-    // protected string $view = 'filament.widgets.admin.account-overview';
-    protected string $view = 'mission-control::widgets.environment-overview';
+    protected string $view = 'mission-control::widgets.environment-widget';
     protected int | string | array $columnSpan = [
         'default' => 'full',
     ];
 
     #[Computed]
-    public function user()
+    public function packages()
     {
-        return auth()->user();
+        return new PackagesService();
     }
 
     #[Computed]

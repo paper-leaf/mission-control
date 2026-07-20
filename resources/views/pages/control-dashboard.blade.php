@@ -1,26 +1,10 @@
 <x-filament-panels::page>
-    {{-- {{ $this->infolist }} --}}
-
-    {{-- @livewire('control-dashboard') --}}
-
     {{ $this->dashboardInfolist() }}
-    {{-- {!! $this->dashboardInfolist(new \Filament\Schemas\Schema($this))->toHtml() !!} --}}
 
-{{-- test
 
+
+{{-- 
     <div class="grid grid-cols-6 gap-7">
-        <x-filament::section class="col-span-6 lg:col-span-3 xl:col-span-2">
-            <p class="font-bold mb-2">Site Environment</p>
-            <code class="text-xl">{{ Str::title(config('app.env', 'not set')) }}</code>
-        </x-filament::section>
-
-        @if(@exec('echo EXEC') == 'EXEC')
-            <x-filament::section class="col-span-6 xl:col-span-2">
-                <p class="font-bold mb-2">Git Branch</p>
-                <code class="text-xl">{{ exec('git branch --show-current') }}</code>
-            </x-filament::section>
-        @endif
-
         <x-filament::section class="col-span-6 lg:col-span-3 xl:col-span-2">
             <p class="font-bold mb-2">Jobs Queue</p>
 
@@ -128,10 +112,7 @@
             </x-slot>
 
             <div class="flex flex-col gap-3 -mt-4 -mb-3">
-                <p class="flex justify-between items-center border-b border-gray-200 py-2">
-                    <span>Laravel Version</span>
-                    <span>{{ composerVersion('laravel/framework') }}</span>
-                </p>
+
 
                 <p class="flex justify-between items-center border-b border-gray-200 py-2">
                     <span>Livewire Version</span>
