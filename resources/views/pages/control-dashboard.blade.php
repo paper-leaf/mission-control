@@ -1,4 +1,13 @@
 <x-filament-panels::page>
+    {{-- {{ $this->infolist }} --}}
+
+    {{-- @livewire('control-dashboard') --}}
+
+    {{ $this->dashboardInfolist() }}
+    {{-- {!! $this->dashboardInfolist(new \Filament\Schemas\Schema($this))->toHtml() !!} --}}
+
+{{-- test
+
     <div class="grid grid-cols-6 gap-7">
         <x-filament::section class="col-span-6 lg:col-span-3 xl:col-span-2">
             <p class="font-bold mb-2">Site Environment</p>
@@ -163,5 +172,5 @@
                 </p>
             </div>
         </x-filament::section>
-    </div>
+    </div> --}}
 </x-filament-panels::page>

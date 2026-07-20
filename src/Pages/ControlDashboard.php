@@ -4,45 +4,135 @@ namespace PaperLeaf\MissionControl\Pages;
 
 use Exception;
 use Filament\Pages\Page;
+// use Filament\Infolists\Infolist;
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Livewire;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
+
+// use Filament\Forms\Components\Livewire;
+// use Filament\Forms\Components\Tabs;
+// use Filament\Forms\Components\Schema;
+
+
+
+use Filament\Schemas\Concerns\InteractsWithSchemas;
+use Filament\Schemas\Concerns\RestrictsFileUploadsToSchemaComponents;
+use Filament\Schemas\Contracts\HasSchemas;
+
+
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Mail\Message;
-// use App\Filament\Clusters\SystemTools;
-// use App\Helpers\NotificationsHelper;
+
 use Filament\Actions\Action;
+
+use PaperLeaf\MissionControl\Widgets\EnvironmentWidget;
 
 class ControlDashboard extends Page
 {
-    protected static ?int $navigationSort = 1;
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-information-circle';
-    // protected static ?string $cluster = SystemTools::class;
+    // use InteractsWithSchemas;
+    // use RestrictsFileUploadsToSchemaComponents;
 
-    protected ?string $subheading = 'View the details of the site\'s versions and configuration.';
+    // protected static ?int $navigationSort = 1;
+    // protected static ?string $cluster = SystemTools::class;
+    
+    protected static ?string $title = 'Mission Control';
+    protected ?string $subheading = "Mission Control is the command center for your Laravel application, giving you a clear view of your site's systems, integrations, and environment.";
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rocket-launch';
 
     protected string $view = 'mission-control::pages.control-dashboard';
 
-    protected static ?string $title = 'Site Details';
-
-    public static function canAccess(): bool
+    public function dashboardinfolist(): Schema
     {
-        return (auth()->user()->can('view_site_details'));
+        return Schema::make($this)
+            ->state([]) 
+            ->schema([
+                Livewire::make(EnvironmentWidget::class)
+                    ->columnSpanFull(),
+
+                Tabs::make('Dashboard Tabs')
+                    ->columnSpanFull()
+                    ->tabs([
+                        $this->systemsTab(),
+                        $this->connectionsTab(),
+                        $this->monitoringTab(),
+                        $this->infrastructureTab(),
+                        $this->packagesTab(),
+                    ]),
+            ]);
+    }
+
+    /***************************************
+     * TABS
+     ***************************************/
+
+    /**
+     * Infrastructure Tab
+     * 
+     * @return Tab
+     */
+    private function infrastructureTab()
+    {
+        return Tab::make('Infrastructure')
+                            ->schema([
+
+                        ]);
     }
 
     /**
-     * Header actions for Site details
+     * Packages Tab
+     * 
+     * @return Tab
      */
-    protected function getHeaderActions(): array
+    private function packagesTab()
     {
-        return [
-            Action::make('help')
-                ->label('Open help guide')
-                ->link()
-                ->icon('heroicon-s-question-mark-circle')
-                ->url('#modal-SystemTools.site-details')
-                ->openUrlInNewTab(false),
-        ];
+        return Tab::make('Packages')
+                            ->schema([
+
+                        ]);
     }
+
+    /**
+     * Monitoring Tab
+     * 
+     * @return Tab
+     */
+    private function monitoringTab()
+    {
+        return Tab::make('Monitoring')
+                            ->schema([
+
+                        ]);
+    }
+
+    /**
+     * Systems Tab
+     * 
+     * @return Tab
+     */
+    private function systemsTab()
+    {
+        return Tab::make('Systems')
+                            ->schema([
+
+                        ]);
+    }
+
+    /**
+     * Connections Tab
+     * 
+     * @return Tab
+     */
+    private function connectionsTab()
+    {
+        return Tab::make('Connections')
+                            ->schema([
+
+                        ]);
+    }
+
 
     /***************************************
      * FUNCTIONS
