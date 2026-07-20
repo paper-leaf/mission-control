@@ -19,16 +19,4 @@ class EnvironmentWidget extends Widget
     {
         return new PackagesService();
     }
-
-    #[Computed]
-    public function userGroup()
-    {
-        return $this->user->group;
-    }
-
-    #[Computed]
-    public function viewingGroup()
-    {
-        return $this->user->currentGroup();
-    }
 }

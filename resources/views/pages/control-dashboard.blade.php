@@ -49,29 +49,6 @@
         </x-filament::section>
 
         <x-filament::section class="col-span-6">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-7">
-                <div>
-                    <p class="font-bold mb-2">{{ Str::upper(config('mail.default', 'mail')) }}</p>
-                    <code class="text-xl">{{  Str::upper(config('mail.host', 'not set')) }}</code>
-
-                    <div class="flex items-center gap-2 mt-2">
-                        <x-filament::badge color="gray">
-                            From Address: {{ config('mail.from.name', 'not set') }}
-                        </x-filament::badge>
-
-                        <x-filament::badge color="gray">
-                            From Name: {{ config('mail.from.address', 'not set') }}
-                        </x-filament::badge>
-                    </div>
-                </div>
-
-                <x-filament::button wire:click="sendTestEmail">
-                    Send test email
-                </x-filament::button>
-            </div>
-        </x-filament::section>
-
-        <x-filament::section class="col-span-6">
             @php $filesystem = config('filesystems.default', 'local'); @endphp
 
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-7">
@@ -103,26 +80,6 @@
                         View Files
                     </x-filament::button>
                 @endif
-            </div>
-        </x-filament::section>
-
-        <x-filament::section class="col-span-6 lg:col-span-3">
-            <x-slot name="heading">
-                Key Package Versions
-            </x-slot>
-
-            <div class="flex flex-col gap-3 -mt-4 -mb-3">
-
-
-                <p class="flex justify-between items-center border-b border-gray-200 py-2">
-                    <span>Livewire Version</span>
-                    <span>{{ composerVersion('livewire/livewire') }}</span>
-                </p>
-
-                <p class="flex justify-between items-center py-2">
-                    <span>Filament Version</span>
-                    <span>{{ composerVersion('filament/filament') }}</span>
-                </p>
             </div>
         </x-filament::section>
 

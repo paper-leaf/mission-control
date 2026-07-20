@@ -1,6 +1,6 @@
 <x-filament-widgets::widget>
     <x-filament::section>
-        <div class="flex flex-col md:flex-row gap-3">
+        <div class="flex flex-col md:flex-row gap-3 md:gap-7">
             <x-filament::section class="fi-compact !bg-primary-100 hidden md:block">
                 <x-filament::icon
                     icon="heroicon-o-rocket-launch"
