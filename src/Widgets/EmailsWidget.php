@@ -2,25 +2,21 @@
 
 namespace PaperLeaf\MissionControl\Widgets;
 
-use Filament\Widgets\Widget;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Str;
 
 use Filament\Notifications\Notification;
 use PaperLeaf\MissionControl\Notifications\TestEmail;
 
-class EmailsWidget extends Widget
+use PaperLeaf\MissionControl\Extends\BaseWidget;
+
+class EmailsWidget extends BaseWidget
 {
-    protected string $view = 'mission-control::widgets.base-widget';
-    protected int | string | array $columnSpan = [
-        'default' => '1',
-    ];
-
-    private string $icon = 'heroicon-o-envelope';
-    private string $heading = 'Emails';
-
-    private bool $has_primary_action = true;
-    private string $primary_action_label = 'Send Test';
+    public string $icon = 'heroicon-o-envelope';
+    public string $heading = 'Emails';
+    
+    public bool $has_primary_action = true;
+    public string $primary_action_label = 'Send Test';
 
     #[Computed]
     private function data()

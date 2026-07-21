@@ -2,27 +2,15 @@
 
 namespace PaperLeaf\MissionControl\Widgets;
 
-use Filament\Widgets\Widget;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Str;
 
-use PaperLeaf\MissionControl\Services\ServicesService;
+use PaperLeaf\MissionControl\Extends\BaseWidget;
 
-class QueuesWidget extends Widget
+class QueuesWidget extends BaseWidget
 {
-    protected string $view = 'mission-control::widgets.base-widget';
-    protected int | string | array $columnSpan = [
-        'default' => '1',
-    ];
-
-    private string $icon = 'heroicon-o-queue-list';
-    private string $heading = 'Jobs Queue';
-
-    #[Computed]
-    public function services()
-    {
-        return new ServicesService();
-    }
+    public string $icon = 'heroicon-o-queue-list';
+    public string $heading = 'Jobs Queue';
 
     #[Computed]
     private function links()
