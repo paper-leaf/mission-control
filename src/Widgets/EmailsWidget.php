@@ -22,7 +22,8 @@ class EmailsWidget extends Widget
     private bool $has_primary_action = true;
     private string $primary_action_label = 'Send Test';
 
-    private function data(): array
+    #[Computed]
+    private function data()
     {
         return [
             'Mailer' => Str::upper(config('mail.default', 'mail')),

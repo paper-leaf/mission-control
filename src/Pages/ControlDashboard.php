@@ -20,6 +20,8 @@ use Filament\Actions\Action;
 use PaperLeaf\MissionControl\Widgets\EnvironmentWidget;
 use PaperLeaf\MissionControl\Widgets\EmailsWidget;
 use PaperLeaf\MissionControl\Widgets\NotificationsWidget;
+use PaperLeaf\MissionControl\Widgets\QueuesWidget;
+use PaperLeaf\MissionControl\Widgets\CacheWidget;
 
 class ControlDashboard extends Page
 {
@@ -108,7 +110,11 @@ class ControlDashboard extends Page
     {
         return Tab::make('Systems')
                     ->schema([
-
+                        Grid::make(2)
+                            ->schema([
+                                Livewire::make(QueuesWidget::class),
+                                Livewire::make(CacheWidget::class),
+                            ])
                     ]);
     }
 

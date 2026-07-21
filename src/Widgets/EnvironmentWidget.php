@@ -5,7 +5,7 @@ namespace PaperLeaf\MissionControl\Widgets;
 use Filament\Widgets\Widget;
 use Livewire\Attributes\Computed;
 
-use PaperLeaf\MissionControl\Services\PackagesService;
+use PaperLeaf\MissionControl\Services\ServicesService;
 
 class EnvironmentWidget extends Widget
 {
@@ -15,8 +15,8 @@ class EnvironmentWidget extends Widget
     ];
 
     #[Computed]
-    public function packages()
+    public function services()
     {
-        return new PackagesService();
+        return new ServicesService();
     }
 }

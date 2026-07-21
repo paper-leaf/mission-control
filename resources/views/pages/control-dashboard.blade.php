@@ -4,37 +4,6 @@
 
 
 {{-- 
-    <div class="grid grid-cols-6 gap-7">
-        <x-filament::section class="col-span-6 lg:col-span-3 xl:col-span-2">
-            <p class="font-bold mb-2">Jobs Queue</p>
-
-            <div class="flex flex-col md:flex-row w-full md:justify-between">
-                <code class="text-xl">{{ Str::title(config('queue.default', 'not set')) }}</code>
-    
-                <x-filament::link
-                    href="/horizon"
-                    tag="a"
-                    target="_blank"
-                    icon="heroicon-o-arrow-top-right-on-square"
-                >
-                    Horizon
-                </x-filament::link>
-            </div>
-        </x-filament::section>
-
-        <x-filament::section class="col-span-6 xl:col-span-3">
-            <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4 xl:gap-7">
-                <div>
-                    <p class="font-bold mb-2">Caching</p>
-                    <code class="text-xl">{{ Str::upper(config('cache.default', 'not enabled')) }}</code>
-                </div>
-
-                <x-filament::button wire:click="clearCache">
-                    Clear cache
-                </x-filament::button>
-            </div>
-        </x-filament::section>
-
         <x-filament::section class="col-span-6 xl:col-span-3">
             <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-4 xl:gap-7">
                 <div>

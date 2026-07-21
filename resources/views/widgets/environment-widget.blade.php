@@ -31,21 +31,21 @@
             <x-filament::section class="col-span-3 md:col-span-1 fi-compact">
                 <div class="flex flex-row justify-between items-center gap-2">
                     <b class="text-xs block">Laravel</b>
-                    <code class="text-sm">{{ $this->packages->composerVersion('laravel/framework') }}</code>
+                    <code class="text-sm">{{ $this->services->composerVersion('laravel/framework') }}</code>
                 </div>
             </x-filament::section>
 
             <x-filament::section class="col-span-3 md:col-span-1 fi-compact">
                 <div class="flex flex-row justify-between items-center gap-2">
                     <b class="text-xs block">Filament</b>
-                    <code class="text-sm">{{ $this->packages->composerVersion('filament/filament') }}</code>
+                    <code class="text-sm">{{ $this->services->composerVersion('filament/filament') }}</code>
                 </div>
             </x-filament::section>
 
             <x-filament::section class="col-span-3 md:col-span-1 fi-compact">
                 <div class="flex flex-row justify-between items-center gap-2">
                     <b class="text-xs block">Livewire</b>
-                    <code class="text-sm">{{ $this->packages->composerVersion('livewire/livewire') }}</code>
+                    <code class="text-sm">{{ $this->services->composerVersion('livewire/livewire') }}</code>
                 </div>
             </x-filament::section>
         </div>
