@@ -4,7 +4,6 @@ namespace PaperLeaf\MissionControl\Pages;
 
 use Exception;
 use Filament\Pages\Page;
-// use Filament\Infolists\Infolist;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Livewire;
 use Filament\Schemas\Components\Tabs;
@@ -23,6 +22,7 @@ use PaperLeaf\MissionControl\Widgets\NotificationsWidget;
 use PaperLeaf\MissionControl\Widgets\QueuesWidget;
 use PaperLeaf\MissionControl\Widgets\CacheWidget;
 use PaperLeaf\MissionControl\Widgets\FilesWidget;
+use PaperLeaf\MissionControl\Widgets\MonitoringTableWidget;
 
 class ControlDashboard extends Page
 {
@@ -95,7 +95,7 @@ class ControlDashboard extends Page
     {
         return Tab::make('Monitoring')
                     ->schema([
-
+                        Livewire::make(MonitoringTableWidget::class),
                     ]);
     }
 

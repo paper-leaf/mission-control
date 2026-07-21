@@ -5,6 +5,8 @@ namespace PaperLeaf\MissionControl\Services;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Http;
 use Composer\InstalledVersions;
 
 use PaperLeaf\MissionControl\Models\Enums\ServiceStatus;
@@ -92,25 +94,40 @@ class ServicesService
     }
 
     /**
-     * Run a Composer command
+     * Get the description of a composer package
      * 
-     * @param string $command
+     * @param string $package_name
      * @return string
      */
-    public function runComposer($command)
+    public function composerDescription($package_name)
     {
-        // Check if the package is installed anywhere in the project
-        if (InstalledVersions::isInstalled('laravel/horizon')) {
-            return response()->json([
-                'installed' => true,
-                'pretty_version' => InstalledVersions::getPrettyVersion($package_name),
-            ]);
+        // Get the list of installed packages from composer
+        $packages = optional(json_decode(file_get_contents('../vendor/composer/installed.json')))->packages;
+        if (!isset($packages)) {
+            return 0;
         }
 
-        return response()->json([
-            'installed' => false,
-            'message' => 'Package laravel/horizon is not installed.'
-        ], 404);
+        // Search for the package that was provided
+        $package = collect($packages)->firstWhere('name', $package_name);
+        if (!isset($package) && !isset($package->description)) {
+            return 0;
+        }
+
+        // Return the version!
+        return $package->description;
+
+        // // Check if the package is installed anywhere in the project
+        // if (InstalledVersions::isInstalled('laravel/horizon')) {
+        //     return response()->json([
+        //         'installed' => true,
+        //         'pretty_version' => InstalledVersions::getPrettyVersion($package_name),
+        //     ]);
+        // }
+
+        // return response()->json([
+        //     'installed' => false,
+        //     'message' => 'Package laravel/horizon is not installed.'
+        // ], 404);
     }
 
     /*********************************************
@@ -130,23 +147,9 @@ class ServicesService
                 break; 
 
             default: 
-
-                // dd($test);
-
-
-                // $function_name = sprintf("is%sInstalled", ucfirst($package));
-
-                // if (method_exists($this, $function_name)) {
-                //     return $this->{$function_name}();
-                // }
-
-                // return false;
-
                 return false;
                 break;
         }        
-
-
     }
 
     /*********************************************
@@ -160,11 +163,36 @@ class ServicesService
      */
     public function horizonStatus()
     {
-        return $this->runArtisan('horizon:status');
+        try {
+            $output = $this->runArtisan('horizon:status', true);
+    
+            if(Str::contains($output, 'INFO')) {
+                return 'Active';
+            }
+        }
+        catch(\Exception $e) {
+            Log::error($e->getMessage());
+        }
+            
+        return 'Inactive';
     }
 
+    /**
+     * Get the current status of a package that's controlled via the .env
+     * .e.g. Laravel Debug Bar
+     * 
+     * @param string $env_key
+     * @return string
+     */
+    public function envStatus($env_key)
+    {
+        $value = env($env_key, false);
+        if($value) {
+            return 'Active';
+        }
 
-
+        return 'Inactive';
+    }
 
 
 
