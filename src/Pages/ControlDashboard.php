@@ -23,6 +23,7 @@ use PaperLeaf\MissionControl\Widgets\QueuesWidget;
 use PaperLeaf\MissionControl\Widgets\CacheWidget;
 use PaperLeaf\MissionControl\Widgets\FilesWidget;
 use PaperLeaf\MissionControl\Widgets\MonitoringTableWidget;
+use PaperLeaf\MissionControl\Widgets\PackagesTableWidget;
 
 class ControlDashboard extends Page
 {
@@ -82,7 +83,7 @@ class ControlDashboard extends Page
     {
         return Tab::make('Packages')
                 ->schema([
-
+                    Livewire::make(PackagesTableWidget::class),
                 ]);
     }
 

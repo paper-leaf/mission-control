@@ -74,7 +74,7 @@ class MonitoringTableWidget extends TableWidget
                     ->label('Service'),
 
                 TextColumn::make('description')
-                    ->formatStateUsing(fn($state) => ($state == 0) ? '' : "<i class=\"text-xs\">{$state}</i>")
+                    ->formatStateUsing(fn($state) => "<i class=\"text-xs\">{$state}</i>")
                     ->html(),
 
                 IconColumn::make('is_installed')

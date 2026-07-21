@@ -101,33 +101,29 @@ class ServicesService
      */
     public function composerDescription($package_name)
     {
-        // Get the list of installed packages from composer
+        // Search for the package that was provided
+        $package = $this->installedPackages()->firstWhere('name', $package_name);
+        if (!isset($package) && !isset($package->description)) {
+            return '';
+        }
+
+        // Return the description!
+        return $package->description;
+    }
+
+    /**
+     * Get the list of all Composer packages that are installed
+     * 
+     * @return Collection
+     */
+    public function installedPackages()
+    {
         $packages = optional(json_decode(file_get_contents('../vendor/composer/installed.json')))->packages;
         if (!isset($packages)) {
-            return 0;
+            return collect([]);
         }
 
-        // Search for the package that was provided
-        $package = collect($packages)->firstWhere('name', $package_name);
-        if (!isset($package) && !isset($package->description)) {
-            return 0;
-        }
-
-        // Return the version!
-        return $package->description;
-
-        // // Check if the package is installed anywhere in the project
-        // if (InstalledVersions::isInstalled('laravel/horizon')) {
-        //     return response()->json([
-        //         'installed' => true,
-        //         'pretty_version' => InstalledVersions::getPrettyVersion($package_name),
-        //     ]);
-        // }
-
-        // return response()->json([
-        //     'installed' => false,
-        //     'message' => 'Package laravel/horizon is not installed.'
-        // ], 404);
+        return collect($packages);
     }
 
     /*********************************************
@@ -193,21 +189,4 @@ class ServicesService
 
         return 'Inactive';
     }
-
-
-
-        // // Get the list of installed packages from composer
-        // $packages = optional(json_decode(file_get_contents('../vendor/composer/installed.json')))->packages;
-        // if (!isset($packages)) {
-        //     return 0;
-        // }
-
-        // // Search for the package that was provided
-        // $package = collect($packages)->firstWhere('name', $package_name);
-        // if (!isset($package) && !isset($package->version)) {
-        //     return 0;
-        // }
-
-        // // Return the version!
-        // return $package->version;
 }
