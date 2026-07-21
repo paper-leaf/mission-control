@@ -39,19 +39,21 @@
         @endswitch
 
         @if(isset($this->links) && is_array($this->links) && count($this->links) > 0)
-            <div class="flex items-start gap-2 flex-col md:flex-row mt-3">
-                @foreach($this->links as $label => $href)
-                    <x-filament::link
-                        href="{{ $href }}"
-                        tag="a"
-                        target="_blank"
-                        icon="heroicon-o-arrow-top-right-on-square"
-                        class="flex items-start w-content"
-                    >
-                        {{ $label }}
-                    </x-filament::link>
-                @endforeach
-            </div>
+            <x-slot name="footer">
+                <div class="flex items-start justify-end gap-2 flex-col md:flex-row">
+                    @foreach($this->links as $label => $href)
+                        <x-filament::link
+                            href="{{ $href }}"
+                            tag="a"
+                            target="_blank"
+                            icon="heroicon-o-arrow-top-right-on-square"
+                            class="flex items-start w-content"
+                        >
+                            {{ $label }}
+                        </x-filament::link>
+                    @endforeach
+                </div>
+            </x-slot>
         @endif
     </x-filament::section>
 </x-filament-widgets::widget>

@@ -22,12 +22,10 @@ use PaperLeaf\MissionControl\Widgets\EmailsWidget;
 use PaperLeaf\MissionControl\Widgets\NotificationsWidget;
 use PaperLeaf\MissionControl\Widgets\QueuesWidget;
 use PaperLeaf\MissionControl\Widgets\CacheWidget;
+use PaperLeaf\MissionControl\Widgets\FilesWidget;
 
 class ControlDashboard extends Page
 {
-    // use InteractsWithSchemas;
-    // use RestrictsFileUploadsToSchemaComponents;
-
     // protected static ?int $navigationSort = 1;
     // protected static ?string $cluster = SystemTools::class;
     
@@ -114,6 +112,7 @@ class ControlDashboard extends Page
                             ->schema([
                                 Livewire::make(QueuesWidget::class),
                                 Livewire::make(CacheWidget::class),
+                                Livewire::make(FilesWidget::class),
                             ])
                     ]);
     }

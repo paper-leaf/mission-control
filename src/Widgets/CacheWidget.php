@@ -20,7 +20,7 @@ class CacheWidget extends BaseWidget
     #[Computed]
     public function data()
     {
-        return Str::upper(config('cache.default', 'not enabled'));
+        return ['Cache Driver' => Str::upper(config('cache.default', 'not enabled'))];
     }
 
     /**

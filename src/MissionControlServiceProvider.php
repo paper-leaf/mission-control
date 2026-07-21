@@ -62,6 +62,13 @@ class MissionControlServiceProvider extends PackageServiceProvider
     {
         // Register the view location
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'mission-control');
+
+        // Allow users to publish the config file via CLI
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/mission-control.php' => config_path('mission-control.php'),
+            ], 'mission-control-config'); 
+        }
     }
 
     public function packageRegistered(): void {}
@@ -90,6 +97,11 @@ class MissionControlServiceProvider extends PackageServiceProvider
                 ], 'mission-control-stubs');
             }
         }
+
+        // Config
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/mission-control.php', 'mission-control'
+        );
 
         // Testing
         Testable::mixin(new TestsMissionControl);

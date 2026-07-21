@@ -29,6 +29,6 @@ class QueuesWidget extends BaseWidget
     #[Computed]
     private function data()
     {
-        return Str::title(config('queue.default', 'not set'));
+        return ['Queue Driver' => Str::title(config('queue.default', 'not set'))];
     }
 }
