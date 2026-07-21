@@ -9,7 +9,9 @@
             </x-filament::section>
 
             <div class="flex flex-col gap-2 justify-center">
-                <b class="font-bold text-xl">{{ config('app.name', 'not set') }}</b>
+                <b class="font-bold text-xl">
+                    {{ config('app.name', 'not set') }}
+                </b>
                 <div class="flex flex-col md:flex-row gap-2">
                     <x-filament::badge color="info">
                         Environment: <code>{{ Str::title(config('app.env', 'not set')) }}</code>

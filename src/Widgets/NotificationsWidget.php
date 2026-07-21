@@ -32,7 +32,6 @@ class NotificationsWidget extends Widget
         ];
     }
 
-
     /**
      * Send a test notification to the current user
      */
@@ -48,29 +47,6 @@ class NotificationsWidget extends Widget
                     ->iconColor('danger')
                     ->send();
             }
-
-            // Notification::make()
-            //     ->title('Saved successfully')
-            //     ->success()
-            //     ->sendToDatabase($current_user);
-            //     // ->send();
-
-
-            // Send the in-system notification
-            // Notification::make()
-            //     ->title('The test notification was sent. Check your notifications + email to read it.')
-            //     ->icon('heroicon-o-check-circle')
-            //     ->iconColor('success')
-            //     ->send();
-
-                    //         Notification::make()
-                    // ->title('If you can read this then your test notification was sent successfully!')
-                    // ->success()
-                    // ->icon('heroicon-o-face-smile')
-
-                        // dd('hi');
-
-                // ->sendToDatabase($current_user);
 
             $current_user->notify(
                 Notification::make()
