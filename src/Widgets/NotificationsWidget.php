@@ -12,7 +12,6 @@ use PaperLeaf\MissionControl\Extends\BaseWidget;
 
 class NotificationsWidget extends BaseWidget
 {
-
     public string $icon = 'heroicon-o-bell-alert';
     public string $heading = 'Filament Notifications';
     
