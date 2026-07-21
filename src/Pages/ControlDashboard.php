@@ -24,6 +24,10 @@ use PaperLeaf\MissionControl\Widgets\CacheWidget;
 use PaperLeaf\MissionControl\Widgets\FilesWidget;
 use PaperLeaf\MissionControl\Widgets\MonitoringTableWidget;
 use PaperLeaf\MissionControl\Widgets\PackagesTableWidget;
+use PaperLeaf\MissionControl\Widgets\PhpWidget;
+use PaperLeaf\MissionControl\Widgets\ServerWidget;
+use PaperLeaf\MissionControl\Widgets\DatabaseWidget;
+use PaperLeaf\MissionControl\Widgets\DeploymentWidget;
 
 class ControlDashboard extends Page
 {
@@ -70,7 +74,13 @@ class ControlDashboard extends Page
     {
         return Tab::make('Infrastructure')
                 ->schema([
-
+                        Grid::make(2)
+                            ->schema([
+                                Livewire::make(PhpWidget::class),
+                                Livewire::make(ServerWidget::class),
+                                Livewire::make(DatabaseWidget::class),
+                                Livewire::make(DeploymentWidget::class),
+                            ])
                 ]);
     }
 
