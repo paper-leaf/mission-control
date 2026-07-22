@@ -6,6 +6,7 @@ use Filament\Widgets\Widget;
 use Livewire\Attributes\Computed;
 
 use PaperLeaf\MissionControl\Services\ServicesService;
+use PaperLeaf\MissionControl\Models\ComposerPackage;
 
 class EnvironmentWidget extends Widget
 {
@@ -18,5 +19,23 @@ class EnvironmentWidget extends Widget
     public function services()
     {
         return new ServicesService();
+    }
+
+    #[Computed]
+    public function laravelVersion()
+    {
+        return optional(ComposerPackage::firstWhere('name', 'laravel/framework'))->version;
+    }
+
+    #[Computed]
+    public function filamentVersion()
+    {
+        return optional(ComposerPackage::firstWhere('name', 'filament/filament'))->version;
+    }
+
+    #[Computed]
+    public function livewireVersion()
+    {
+        return optional(ComposerPackage::firstWhere('name', 'livewire/livewire'))->version;
     }
 }

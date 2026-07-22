@@ -43,13 +43,11 @@ class MonitoringTableWidget extends TableWidget
                     $package_details = $package_service->checkPackage($service->get('package_name', $key));
 
                     $row['is_installed'] = $package_details['installed'];
-                    $row['version'] = $package_details['version'];
                     $row['description'] = $package_service->composerDescription($service->get('package_name', $key));
                     break;
 
                 default: 
                     $row['is_installed'] = $service->get('is_installed', false);
-                    $row['version'] = $service->get('version', null);
                     break;
             }
 
@@ -81,10 +79,6 @@ class MonitoringTableWidget extends TableWidget
                     ->label('Installed')
                     ->trueIcon(Heroicon::CheckCircle)
                     ->boolean(),
-
-                TextColumn::make('version')
-                    ->label('Installed version')
-                    ->formatStateUsing(fn($state) => Str::start($state, 'v')),
 
                 TextColumn::make('status')
                     ->formatStateUsing(fn($record, $state) => ($record['is_installed']) ? $state : null)
