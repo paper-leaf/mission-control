@@ -5,7 +5,7 @@ namespace PaperLeaf\MissionControl\Widgets;
 use Livewire\Attributes\Computed;
 use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
-use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
 
 use Filament\Actions\Action;
 use Filament\Support\Enums\IconPosition;
@@ -15,72 +15,35 @@ use Filament\Tables\Table;
 use Filament\Widgets\TableWidget;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\Filter;
 
 use PaperLeaf\MissionControl\Services\ServicesService;
 
+use PaperLeaf\MissionControl\Models\ComposerPackage;
+use PaperLeaf\MissionControl\Models\Enums\InstallType;
+
 class PackagesTableWidget extends TableWidget
 {
-    private function getRecords($search, $page, $recordsPerPage)
-    {
-        // Get all the data from composer.json
-        $rows = [];
-        $package_service = new ServicesService();
-        $packages = $package_service->installedPackages()
-                        ->transform(function($package) {
-                            $source = $package->source ?? null;
-
-                            return [
-                                'name' => optional($package)->name,
-                                'description' => optional($package)->description,
-                                'version' => optional($package)->version,
-                                'source_url' => optional($source)->url,
-                            ];
-                        });
-
-        $total = $packages->count();
-
-        // Apply the Search
-        $packages->when(filled($search), function($data) {
-            $data->filter(
-                fn (array $record): bool => str_contains(Str::lower($record['name']), Str::lower($search)),
-            );
-        });
-
-        // Apply the pagination
-        $packages = $packages->forPage($page, $recordsPerPage);
-
-        return [
-            'records' => $packages,
-            'total' => $total
-        ];
-    }
-
     public function table(Table $table): Table
     {
         return $table
             ->heading('')
-            ->records(function (?string $search, int $page, int $recordsPerPage): LengthAwarePaginator {
-                $record_data = $this->getRecords($search, $page, $recordsPerPage);
-                            
-                return new LengthAwarePaginator(
-                    $record_data['records'],
-                    total: $record_data['total'],
-                    perPage: $recordsPerPage,
-                    currentPage: $page,
-                );
-            })
+            ->query(fn() => ComposerPackage::query())
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('pretty_name')
                     ->label('Package')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable()
+                    ->tooltip(fn($record) => $record->description),
 
-                TextColumn::make('description')
-                    ->formatStateUsing(fn($state) => ($state == 0) ? '' : "<i class=\"text-xs\">{$state}</i>")
-                    ->html(),
+                TextColumn::make('install_type')
+                    ->badge()
+                    ->tooltip(fn($state) => optional($state)->getDescription())
+                    ->sortable(),
 
-                TextColumn::make('version')
-                    ->label('Installed version')
-                    ->formatStateUsing(fn($state) => Str::start($state, 'v')),
+                TextColumn::make('prettyVersion')
+                    ->label('Installed version'),
                 
             ])
             ->recordActions([
@@ -92,6 +55,13 @@ class PackagesTableWidget extends TableWidget
                     ->link()
                     ->openUrlInNewTab()
                     ->url(fn($record) => $record['source_url']),
+            ])
+            ->filters([
+                Filter::make('hide_dependencies')
+                    ->label('Hide Dependencies')
+                    ->default()
+                    ->query(fn (Builder $query): Builder => $query->where('install_type', '!=', InstallType::DEPENDENCY))
+                    ->toggle()
             ]);
     }
 }

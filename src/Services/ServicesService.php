@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\File;
 use Composer\InstalledVersions;
 
 use PaperLeaf\MissionControl\Models\Enums\ServiceStatus;
@@ -118,12 +119,45 @@ class ServicesService
      */
     public function installedPackages()
     {
-        $packages = optional(json_decode(file_get_contents('../vendor/composer/installed.json')))->packages;
+        $installed_path = base_path('/vendor/composer/installed.json');
+        if(!File::exists($installed_path)) {
+            return collect([]);
+        }
+
+        $packages = optional(json_decode(file_get_contents($installed_path)))->packages;
         if (!isset($packages)) {
             return collect([]);
         }
 
         return collect($packages);
+    }
+
+    /**
+     * Get the list of packages that were user installed 
+     * 
+     * @return Collection
+     */
+    public function userInstalledPackages()
+    {
+        $composer_path = base_path('composer.json');
+        if(!File::exists($composer_path)) {
+            return collect([]);
+        }
+
+        $composer_data = collect(json_decode(file_get_contents($composer_path)));
+
+        $require = collect($composer_data->get('require', []))
+                    ->mapWithKeys(function($version, $package_name) {
+                        return [$package_name => 'require'];
+                    });
+
+        $require_dev = collect($composer_data->get('require-dev', []))
+                        ->mapWithKeys(function($version, $package_name) {
+                            return [$package_name => 'require-dev'];
+                        });
+
+        $installed = $require_dev->merge($require);
+        return $installed;
     }
 
     /*********************************************
