@@ -1,7 +1,6 @@
 {
     "name": "paper-leaf/mission-control",
     "description": "Mission Control is the command center for your Laravel application, giving you a clear view of your site's systems, integrations, and environment. Monitor key services, inspect application details, and perform essential maintenance tasks from one convenient location.",
-    "version": "dev-main",
     "type": "library",
     "keywords": [
         "Paper Leaf",
