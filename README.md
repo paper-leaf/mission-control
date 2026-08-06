@@ -1,11 +1,9 @@
-# Mission Control is the command center for your Laravel application, giving you a clear view of your site's systems, integrations, and environment. Monitor key services, inspect application details, and perform essential maintenance tasks from one convenient location.
+# Mission Control
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/paper-leaf/mission-control.svg?style=flat-square)](https://packagist.org/packages/paper-leaf/mission-control)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/paper-leaf/mission-control/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/paper-leaf/mission-control/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/paper-leaf/mission-control/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/paper-leaf/mission-control/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/paper-leaf/mission-control.svg?style=flat-square)](https://packagist.org/packages/paper-leaf/mission-control)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Mission Control is the command center for your Laravel application, giving you a clear view of your site's systems, integrations, and environment. Monitor key services, inspect application details, and perform essential maintenance tasks from one convenient location.
 
 ## Installation
 
@@ -47,33 +45,96 @@ This is the contents of the published config file:
 
 ```php
 return [
+    /*************************************
+     * FILE STORAGE
+     *************************************/
+
+    'file_storage' => [
+        // If you store your files in a specific directory within the bucket (e.g. per environment) specify that here
+        // You can get the prefix from your URL on S3 e.g. https://ca-central-1.console.aws.amazon.com/s3/buckets/name-of-bucket?prefix=prefix-here%2F
+        'aws_folder_prefix' => \Illuminate\Support\Str::upper(config('app.env', 'not set')),
+    ],
+
+    /*************************************
+     * MONITORING
+     *************************************/
+
+    // Connects the site to the different monitoring packages that are installed (or SHOULD be installed)
+    'monitoring' => [
+        'sentry' => [
+            'label' => 'Sentry',
+            'link' => sprintf("https://paper-leaf-1x.sentry.io/issues?environment=%s&project=4511457401307136", config('app.env', 'not set')),
+            'package_type' => 'composer',
+            'package_name' => 'sentry/sentry-laravel',
+        ],
+
+        'horizon' => [
+            'label' => 'Horizon',
+            'link' => '/horizon',
+            'package_type' => 'composer',
+            'package_name' => 'laravel/horizon',
+            'status_function' => 'horizonStatus',
+        ],
+
+        'health' => [
+            'label' => 'Laravel Health',
+            'package_type' => 'composer',
+            'package_name' => 'spatie/laravel-health',
+        ],
+
+        'ray' => [
+            'label' => 'Ray',
+            'package_type' => 'composer',
+            'package_name' => 'spatie/laravel-ray',
+        ],
+
+        'debugbar' => [
+            'label' => 'Debugbar',
+            'package_type' => 'composer',
+            'package_name' => 'barryvdh/laravel-debugbar',
+            'status_function' => 'envStatus',
+            'param' => 'DEBUGBAR_ENABLED',
+        ],
+
+        'wirespy' => [
+            'label' => 'WireSpy',
+            'package_type' => 'composer',
+            'package_name' => 'wire-elements/wire-spy',
+            'status_function' => 'envStatus',
+            'param' => 'WIRE_SPY_ENABLED',
+        ],
+
+        // Any other packages that are managed outside of Composer can be added manually
+        // 'atatus' => [
+        //     'label' => 'Atatus',
+        //     'is_installed' => true,
+        //     'version' => '123',
+        // ],
+    ],
 ];
 ```
 
 ## Usage
 
+Register the plugin in your panel provider to add the Mission Control dashboard to your Filament panel.
+
 ```php
-$missionControl = new PaperLeaf\MissionControl();
-echo $missionControl->echoPhrase('Hello, Paper Leaf!');
+->plugin(
+    MissionControlPlugin::make()
+)
 ```
 
-## Testing
+Once registered, you can optionally customize how the page appears within your panel using any of the following options.
 
-```bash
-composer test
+```php
+->plugin(
+    MissionControlPlugin::make()
+        ->pageTitle('Custom Heading')
+        ->pageSubheading('Custom subheading content, page description')
+        ->pageIcon('heroicon-o-custom-icon')
+        ->pageCluster(Cluster::class)
+)
 ```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](.github/SECURITY.md) on how to report security vulnerabilities.
 
 ## Credits
 
