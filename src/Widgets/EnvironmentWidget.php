@@ -7,6 +7,7 @@ use Livewire\Attributes\Computed;
 
 use PaperLeaf\MissionControl\Services\ServicesService;
 use PaperLeaf\MissionControl\Models\ComposerPackage;
+use PaperLeaf\MissionControl\MissionControlPlugin;
 
 class EnvironmentWidget extends Widget
 {
@@ -14,6 +15,13 @@ class EnvironmentWidget extends Widget
     protected int | string | array $columnSpan = [
         'default' => 'full',
     ];
+
+    #[Computed]
+    public function icon()
+    {
+        $plugin = filament()->getPlugin(MissionControlPlugin::ID);
+        return $plugin->getPageIcon() ?? 'heroicon-o-rocket-launch';
+    }
 
     #[Computed]
     public function services()

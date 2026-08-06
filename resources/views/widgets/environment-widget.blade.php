@@ -3,7 +3,7 @@
         <div class="flex flex-col md:flex-row gap-3 md:gap-7">
             <x-filament::section class="fi-compact !bg-primary-100 hidden md:block">
                 <x-filament::icon
-                    icon="heroicon-o-rocket-launch"
+                    icon="{{ $this->icon }}"
                     class="w-12 h-12"
                 />
             </x-filament::section>

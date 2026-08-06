@@ -3,18 +3,21 @@
 namespace PaperLeaf\MissionControl\Pages;
 
 use Exception;
+use Livewire\Attributes\Computed;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Mail\Message;
+use Illuminate\Contracts\Support\Htmlable;
+
 use Filament\Pages\Page;
 use Filament\Schemas\Schema;
 use Filament\Schemas\Components\Livewire;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Components\Grid;
-
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Mail\Message;
-
 use Filament\Actions\Action;
+
+use PaperLeaf\MissionControl\MissionControlPlugin;
 
 use PaperLeaf\MissionControl\Widgets\EnvironmentWidget;
 use PaperLeaf\MissionControl\Widgets\EmailsWidget;
@@ -31,14 +34,66 @@ use PaperLeaf\MissionControl\Widgets\DeploymentWidget;
 
 class ControlDashboard extends Page
 {
-    // protected static ?int $navigationSort = 1;
-    // protected static ?string $cluster = SystemTools::class;
-    
-    protected static ?string $title = 'Mission Control';
-    protected ?string $subheading = "Mission Control is the command center for your Laravel application, giving you a clear view of your site's systems, integrations, and environment.";
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rocket-launch';
-
     protected string $view = 'mission-control::pages.control-dashboard';
+    protected static ?string $cluster = null;
+    public static $plugin;
+
+    #[Computed]
+    public function plugin() 
+    {
+        $plugin = filament()->getPlugin(MissionControlPlugin::ID);
+        self::$plugin = $plugin;
+        return $plugin;
+    }
+
+    // Setter invoked by the Plugin class during the panel registration phase
+    public static function setClusterClass(string $cluster_class): void
+    {
+        static::$cluster = $cluster_class;
+    }
+
+    public function getTitle(): string | Htmlable
+    {
+        return $this->plugin?->getPageTitle() ?? 'Mission Control';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return filament()->getPlugin(MissionControlPlugin::ID)->getPageTitle() ?? 'Mission Control';
+    }
+
+    public function getSubheading(): string | Htmlable
+    {
+        return $this->plugin?->getPageSubheading() ?? 'Mission Control is the command center for your Laravel application, giving you a clear view of your site\'s systems, integrations, and environment.';
+    }
+
+    public static function getNavigationIcon(): string | \BackedEnum | null
+    {
+        return filament()->getPlugin(MissionControlPlugin::ID)->getPageIcon() ?? 'heroicon-o-rocket-launch';
+    }
+
+    public static function getNavigationGroup(): string | \UnitEnum | null
+    {
+        return filament()->getPlugin(MissionControlPlugin::ID)->getPageNavigationGroup() ?? null;
+    }
+
+    // public static function getCluster(): ?string
+    // {
+    //     app()->make(PanelRegistry::class);
+
+    //     $currentPanel = Filament::getCurrentPanel();
+    //     dd($currentPanel, filament()->getPanel('admin'));
+
+    //     dd(filament()->getDefaultPanel(), Filament::getPanels());
+
+    //     // return filament()->getDefaultPanel()->getPlugin(MissionControlPlugin::ID)->getPageCluster() ?? null;
+    //     return filament()->getPanel('admin')->getPlugin(MissionControlPlugin::ID)->getPageCluster() ?? null;
+    // }
+
+    public static function getNavigationSort(): ?int
+    {
+        return filament()->getPlugin(MissionControlPlugin::ID)->getPageNavigationSort() ?? null;
+    }
 
     public function dashboardinfolist(): Schema
     {
