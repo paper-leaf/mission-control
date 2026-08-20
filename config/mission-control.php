@@ -19,7 +19,7 @@ return [
     'monitoring' => [
         'sentry' => [
             'label' => 'Sentry',
-            'link' => sprintf("https://paper-leaf-1x.sentry.io/issues?environment=%s&project=4511457401307136", config('app.env', 'not set')),
+            'link' => sprintf("https://paper-leaf-1x.sentry.io/issues?environment=%s&project=%s", config('app.env', 'not set'), 'sentry-id'),
             'package_type' => 'composer',
             'package_name' => 'sentry/sentry-laravel',
         ],

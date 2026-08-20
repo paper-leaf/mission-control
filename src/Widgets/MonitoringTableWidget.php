@@ -98,7 +98,7 @@ class MonitoringTableWidget extends TableWidget
             ])
             ->recordActions([
                 Action::make('view')
-                    ->visible(fn($record) => isset($record['link']))
+                    ->visible(fn($record) => isset($record['link']) && $record['is_installed'])
                     ->label(fn($record) => $record['link_label'])
                     ->icon('heroicon-o-arrow-top-right-on-square')
                     ->iconPosition(IconPosition::After)
