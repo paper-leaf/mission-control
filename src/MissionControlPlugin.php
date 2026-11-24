@@ -151,23 +151,11 @@ class MissionControlPlugin implements Plugin
 
     public function getPageBreadcrumbs(): array
     {
-        // dd('test');
-        return value($this->page_breadcrumbs);
+        $breadcrumbs = value($this->page_breadcrumbs);
+        if(!is_array($breadcrumbs)) {
+            $breadcrumbs = [];
+        }
 
-        // if (isset(static::$cluster)) {
-        //     // If a Cluster is set, use the base breadcrumbs
-        //     $breadcrumbs = (static::$cluster)::baseBreadcrumb();
-        // } else {
-        //     // Otherwise create the base breadcrumb from this resource
-        //     $breadcrumbs = [Dashboard::getUrl() => 'Home'];
-        //     if (isset(static::$navigationGroup)) {
-        //         $breadcrumbs[] = static::$navigationGroup;
-        //     }
-        // }
-
-        // // Add this page's title
-        // $breadcrumbs[] = static::getNavigationLabel();
-
-        // return $breadcrumbs;
+        return $breadcrumbs;
     }
 }
