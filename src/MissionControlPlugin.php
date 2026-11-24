@@ -2,6 +2,8 @@
 
 namespace PaperLeaf\MissionControl;
 
+use Closure;
+
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
@@ -17,6 +19,7 @@ class MissionControlPlugin implements Plugin
     protected string | Closure | null $page_navigation_sort = null;
     protected string | Closure | null $page_navigation_group = null;
     protected string | Closure | null $page_cluster = null;
+    protected array  | Closure | null $page_breadcrumbs = null;
 
     public function getId(): string
     {
@@ -135,5 +138,36 @@ class MissionControlPlugin implements Plugin
     public function getPageCluster(): ?string
     {
         return $this->page_cluster;
+    }
+
+    /**
+     * Page Breadcrumbs
+     */
+    public function pageBreadcrumbs(array | Closure | null $page_breadcrumbs): static
+    {
+        $this->page_breadcrumbs = $page_breadcrumbs;
+        return $this;
+    }
+
+    public function getPageBreadcrumbs(): array
+    {
+        // dd('test');
+        return value($this->page_breadcrumbs);
+
+        // if (isset(static::$cluster)) {
+        //     // If a Cluster is set, use the base breadcrumbs
+        //     $breadcrumbs = (static::$cluster)::baseBreadcrumb();
+        // } else {
+        //     // Otherwise create the base breadcrumb from this resource
+        //     $breadcrumbs = [Dashboard::getUrl() => 'Home'];
+        //     if (isset(static::$navigationGroup)) {
+        //         $breadcrumbs[] = static::$navigationGroup;
+        //     }
+        // }
+
+        // // Add this page's title
+        // $breadcrumbs[] = static::getNavigationLabel();
+
+        // return $breadcrumbs;
     }
 }

@@ -77,22 +77,14 @@ class ControlDashboard extends Page
         return filament()->getPlugin(MissionControlPlugin::ID)->getPageNavigationGroup() ?? null;
     }
 
-    // public static function getCluster(): ?string
-    // {
-    //     app()->make(PanelRegistry::class);
-
-    //     $currentPanel = Filament::getCurrentPanel();
-    //     dd($currentPanel, filament()->getPanel('admin'));
-
-    //     dd(filament()->getDefaultPanel(), Filament::getPanels());
-
-    //     // return filament()->getDefaultPanel()->getPlugin(MissionControlPlugin::ID)->getPageCluster() ?? null;
-    //     return filament()->getPanel('admin')->getPlugin(MissionControlPlugin::ID)->getPageCluster() ?? null;
-    // }
-
     public static function getNavigationSort(): ?int
     {
         return filament()->getPlugin(MissionControlPlugin::ID)->getPageNavigationSort() ?? null;
+    }
+
+    public function getBreadcrumbs(): array
+    {
+        return filament()->getPlugin(MissionControlPlugin::ID)->getPageBreadcrumbs() ?? null;
     }
 
     public function dashboardinfolist(): Schema
